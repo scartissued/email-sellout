@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { supabase, isSupabaseConfigured } from './lib/supabase';
-import { LogOut, ExternalLink, Mail, ShieldAlert } from 'lucide-react';
+import { LogOut, ExternalLink, Mail, ShieldAlert, Sun, Moon } from 'lucide-react';
 
 export default function App() {
   const [session, setSession] = useState<any>(null);
@@ -9,6 +9,19 @@ export default function App() {
   const [password, setPassword] = useState('');
   const [authError, setAuthError] = useState('');
   const [isLogin, setIsLogin] = useState(true);
+
+  const [theme, setTheme] = useState<'dark' | 'light'>(
+    () => (localStorage.getItem('theme') as 'dark' | 'light') || 'dark'
+  );
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prev => prev === 'dark' ? 'light' : 'dark');
+  };
 
   // Table state
   const [aliases, setAliases] = useState<any[]>([]);
@@ -96,7 +109,12 @@ export default function App() {
 
   if (!isSupabaseConfigured) {
     return (
-      <div className="container flex-center">
+      <div className="container flex-center" style={{ position: 'relative' }}>
+        <div style={{ position: 'absolute', top: 16, right: 16 }}>
+          <button className="btn btn-icon" onClick={toggleTheme} title="Toggle Theme">
+            {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+          </button>
+        </div>
         <div className="glass-panel" style={{ padding: '24px', textAlign: 'center' }}>
           <ShieldAlert size={48} color="var(--error-color)" style={{ marginBottom: '16px' }} />
           <h2>Setup Required</h2>
@@ -112,7 +130,12 @@ export default function App() {
 
   if (!session) {
     return (
-      <div className="container flex-center">
+      <div className="container flex-center" style={{ position: 'relative' }}>
+        <div style={{ position: 'absolute', top: 16, right: 16 }}>
+          <button className="btn btn-icon" onClick={toggleTheme} title="Toggle Theme">
+            {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+          </button>
+        </div>
         <div className="glass-panel" style={{ padding: '24px', width: '100%', maxWidth: '400px' }}>
           <div style={{ textAlign: 'center', marginBottom: '24px' }}>
             <Mail size={32} color="var(--accent-color)" />
@@ -168,6 +191,9 @@ export default function App() {
           <h3 style={{ fontSize: '1rem' }}>Aliases</h3>
         </div>
         <div className="header-actions">
+          <button className="btn btn-icon" onClick={toggleTheme} title="Toggle Theme">
+            {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+          </button>
           <button className="btn btn-icon" onClick={openInTab} title="Open in Tab">
             <ExternalLink size={18} />
           </button>
