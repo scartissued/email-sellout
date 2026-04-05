@@ -1,0 +1,54 @@
+.email-sellout-popup {
+  position: absolute;
+  z-index: 999999;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 13px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  animation: slideFadeIn 0.2s ease-out;
+  
+  /* Inherit these from the main css scope or set defaults */
+  background: rgba(15, 16, 22, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: white;
+}
+
+.email-sellout-popup span {
+  opacity: 0.9;
+}
+
+.email-sellout-popup .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  background-color: #6366f1;
+  color: white;
+}
+
+.email-sellout-popup .btn:hover {
+  background-color: #4f46e5;
+}
+
+@keyframes slideFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
