@@ -113,7 +113,7 @@ export default function App() {
   if (!session) {
     return (
       <div className="container flex-center">
-        <div className="glass-panel" style={{ padding: '24px', width: '100%' }}>
+        <div className="glass-panel" style={{ padding: '24px', width: '100%', maxWidth: '400px' }}>
           <div style={{ textAlign: 'center', marginBottom: '24px' }}>
             <Mail size={32} color="var(--accent-color)" />
             <h2 style={{ marginTop: '8px' }}>Email Sellout</h2>

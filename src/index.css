@@ -228,3 +228,30 @@ p {
   font-size: 0.75rem;
   color: var(--text-secondary);
 }
+
+/* Full Page / New Tab View */
+@media (min-width: 600px) {
+  body {
+    width: 100vw;
+    min-height: 100vh;
+    align-items: center;
+  }
+
+  #root {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+  }
+
+  .app-header {
+    border-radius: 12px;
+    border: 1px solid var(--panel-border);
+    margin-bottom: 24px;
+    position: relative;
+  }
+
+  .container {
+    padding: 0;
+  }
+}
