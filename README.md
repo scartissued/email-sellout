@@ -1,6 +1,8 @@
-# Email Sellout
 
-![Email Sellout Demo](demo.mp4)
+
+https://github.com/user-attachments/assets/316e9e46-75d2-48d4-9bbd-f40e058ee814
+
+# Email Sellout
 
 **Email Sellout** is a Chrome extension designed to help you manage email aliases and track website spam effortlessly.
 
