@@ -1,6 +1,6 @@
 # Email Sellout
 
-![Email Sellout Demo](./demo.mov)
+<video src="./demo.mp4" controls="controls" width="100%" autoplay loop muted></video>
 
 **Email Sellout** is a Chrome extension designed to help you manage email aliases and track website spam effortlessly.
 
