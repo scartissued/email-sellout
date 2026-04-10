@@ -31,6 +31,30 @@ VITE_SUPABASE_URL=your_supabase_project_url
 VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
 ```
 
+### Database Setup
+You must create the `aliases` table in your Supabase project with Row Level Security (RLS) enabled. You can run the following snippet in your Supabase SQL Editor:
+
+```sql
+CREATE TABLE public.aliases (
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    user_id UUID REFERENCES auth.users(id) NOT NULL,
+    base_email TEXT NOT NULL,
+    domain TEXT NOT NULL,
+    alias_email TEXT NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
+-- Protect the table
+ALTER TABLE public.aliases ENABLE ROW LEVEL SECURITY;
+
+-- Allow users to manage only their own data
+CREATE POLICY "Users can manage their own aliases" 
+ON public.aliases
+FOR ALL 
+USING (auth.uid() = user_id)
+WITH CHECK (auth.uid() = user_id);
+```
+
 ### Startup / Clone Method
 
 Follow these steps to clone the repository, install dependencies, and run the development server:

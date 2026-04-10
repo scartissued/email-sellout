@@ -23,7 +23,13 @@ async function handleSaveAlias(payload: { base_email: string, domain: string, al
     return { success: false, error: 'User not authenticated' };
   }
 
-  // Set the anon client to use the user's auth token for this request
+  // Explicitly set the session on the background client so Supabase handles the auth headers correctly
+  // This prevents any weird behavior where the client tries to initialize from an empty local storage!
+  await supabase.auth.setSession({
+    access_token: sb_session.access_token,
+    refresh_token: sb_session.refresh_token
+  });
+
   const { data, error } = await supabase
     .from('aliases')
     .insert([

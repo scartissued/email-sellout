@@ -29,17 +29,18 @@ document.addEventListener('focusin', async (e) => {
 
     // Check if the current page or form is a sign up / register page
     const url = window.location.href.toLowerCase();
-    // Get text of the form or fallback to checking the page title
-    const formText = target.closest('form')?.innerText.toLowerCase() || document.title.toLowerCase();
     
-    const isSignUp = url.includes('signup') || url.includes('register') || url.includes('join') ||
-                     formText.includes('sign up') || formText.includes('create account') || formText.includes('register');
-                     
+    // If the URL explicitly says signup/register, abort (we do not want it here)
+    const isSignUpUrl = url.includes('signup') || url.includes('register') || url.includes('join');
+    if (isSignUpUrl) return;
+
+    // Ensure it is a login page by checking URL, Form text, or Page title
+    const formText = target.closest('form')?.innerText.toLowerCase() || document.title.toLowerCase();
     const isLogin = url.includes('login') || url.includes('signin') ||
                     formText.includes('log in') || formText.includes('sign in') || formText.includes('login');
 
-    // As requested: only show popup on login pages and NOT on sign up or register pages
-    if (isSignUp || !isLogin) return;
+    // Only show popup on login pages
+    if (!isLogin) return;
     
     // Remove any existing one
     removePopup();
